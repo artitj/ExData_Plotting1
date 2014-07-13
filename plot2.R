@@ -1,5 +1,5 @@
-# Plot1.R
-# Creates a histogram of global active power
+# Plot2.R
+# Creates a line plot of global active power vs day/time
 
 # Read data
 data <- read.table("household_power_consumption.txt",sep=";",header=T,na.strings="?")
@@ -10,7 +10,7 @@ timeUpLim <- as.POSIXct("2007-02-02")
 
 dataSubset <- subset(data,Date >= timeLowLim & Date <= timeUpLim)
 dataSubset$DateTime <- strptime(paste(dataSubset$Date,dataSubset$Time,sep=" "),format="%Y-%m-%d %H:%M:%S")
-png(filename="plot1.png",width=480,height=480,pointsize=12)
-hist(dataSubset$Global_active_power,breaks=12,col="red",
-     main="Global Active Power",xlab="Global Active Power (kilowatts)")
+png(filename="plot2.png",width=480,height=480,pointsize=12)
+plot(x=dataSubset$DateTime,y=dataSubset$Global_active_power,type="l",
+     xlab="",ylab="Global Active Power (kilowatts)")
 dev.off()
